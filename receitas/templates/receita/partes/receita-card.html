@@ -1,0 +1,65 @@
+<div class=" receita receita-list-item">
+    <div class="receita-cover">
+        <a href=" {% url 'receita:detalhe' receita.id %} ">
+            <img src={{receita.cover.url}} alt="Temporário">
+        </a>
+    </div>
+    <div class="receita-title-contaier">
+        <a href=" {% url 'receita:detalhe' receita.id %} ">
+            <h2 class="receita-title">
+                {{receita.title}}
+            </h2>
+        </a>
+    </div>
+
+    <div class="receita-autor">
+        <span class="receita-autor-item">
+            <i class="fa-solid fa-clipboard-user"></i>
+            {{receita.autor.nome}} {{receita.autor.sobrenome}}
+        </span>
+        <span class="receita-autor-item">
+            <i class="fa-solid fa-calendar-days"></i>
+            {{receita.data_cria | date:'d/m/Y' }}
+        </span>
+        <span class="receita-autor-item">
+            <a href="">
+                <i class="fa-solid fa-receipt"></i>
+                <span>{{receita.categoria.nome}}</span>
+            </a>
+        </span>
+    </div>
+
+    <div class="receita-content">
+        <p>{{receita.descricao}}</p>
+    </div>
+
+    <div class="receita-meta-container">
+        <div class="receita-meta receita-preparacao">
+            <h3 class="receita-meta-title"><i class="fa-solid fa-clock-rotate-left"></i> Preparo</h3>
+            <div class="receita-meta-text">
+                {{receita.tempo_preparo}} {{receita.unidade_tempo}}
+            </div>
+        </div>
+        <div class="receita-meta receita-servem">
+            <h3 class="receita-meta-title"><i class="fa-solid fa-pizza-slice"></i> Porção</h3>
+            <div class="receita-meta-text">
+                {{receita.porcoes}} {{receita.unidade_por}}
+            </div>
+        </div>
+    </div>
+
+    {% if not is_detail %}
+    <footer class="receita-fotter">
+        <a href=" {% url 'receita:detalhe' receita.id %} " class="receita read-more button button-dark button-full-width">
+            <i class="fa-solid fa-eye"></i>
+            <span>Ver mais...</span>
+        </a>
+    </footer>
+    {% endif %}
+
+    {% if is_detail is True %}
+        <div class="como-fazer">
+            {{receita.comofazer|linebreaksbr }}
+        </div>
+    {% endif %}
+</div>

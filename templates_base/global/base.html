@@ -6,12 +6,12 @@
     {% include 'receita/partes/search.html' %}  
 
     <main class="main-content-container">
-        <div class="main-content main-content-list container">
-            {% for receita in receitas %}
-                {% include 'receita/partes/receita-card.html' %}
-            {% endfor %}
-        </div>
+        {% block content %}
+
+        {% endblock content %}
+
     </main>
+
     {% include 'receita/partes/footer.html' %}
 </body>
 </html>
