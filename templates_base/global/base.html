@@ -1,5 +1,11 @@
 {% load static %}
-{% include 'receita/partes/head.html' %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    {% include 'receita/partes/head.html' %}
+    <title> {% block titulo %}{% endblock titulo %} CookBook</title>
+</head>
 
 <body>
     {% include 'receita/partes/header.html' %}     

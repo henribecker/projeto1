@@ -7,26 +7,38 @@
     <div class="receita-title-contaier">
         <a href=" {% url 'receita:detalhe' receita.id %} ">
             <h2 class="receita-title">
-                {{receita.title}}
+                {{receita.titulo}}
             </h2>
         </a>
     </div>
 
     <div class="receita-autor">
-        <span class="receita-autor-item">
-            <i class="fa-solid fa-clipboard-user"></i>
-            {{receita.autor.nome}} {{receita.autor.sobrenome}}
-        </span>
+        {% if receita.usuario is not None %}
+            <span class="receita-autor-item">
+                <i class="fa-solid fa-clipboard-user"></i>
+                {% if receita.usuario.first_name %}
+                {{receita.usuario.first_name}} {{receita.usuario.last_name}}
+                {% else %}
+                {{receita.usuario.username}}
+                {% endif %}
+            </span>
+        {% else %}
+            
+        {% endif %}
         <span class="receita-autor-item">
             <i class="fa-solid fa-calendar-days"></i>
-            {{receita.data_cria | date:'d/m/Y' }}
+            {{receita.criacao | date:'d/m/Y' }}
         </span>
-        <span class="receita-autor-item">
-            <a href="">
-                <i class="fa-solid fa-receipt"></i>
-                <span>{{receita.categoria.nome}}</span>
-            </a>
-        </span>
+            
+
+        {% if receita.categoria is not None %}
+            <span class="receita-autor-item">
+                <a href={% url 'receita:categoria' receita.categoria.id %} >
+                    <i class="fa-solid fa-receipt"></i>
+                    <span>{{receita.categoria.name}}</span>
+                </a>
+            </span>
+        {% endif %}
     </div>
 
     <div class="receita-content">
@@ -37,13 +49,13 @@
         <div class="receita-meta receita-preparacao">
             <h3 class="receita-meta-title"><i class="fa-solid fa-clock-rotate-left"></i> Preparo</h3>
             <div class="receita-meta-text">
-                {{receita.tempo_preparo}} {{receita.unidade_tempo}}
+                {{receita.tempo_prep}} {{receita.unidade_tempo}}
             </div>
         </div>
         <div class="receita-meta receita-servem">
             <h3 class="receita-meta-title"><i class="fa-solid fa-pizza-slice"></i> Porção</h3>
             <div class="receita-meta-text">
-                {{receita.porcoes}} {{receita.unidade_por}}
+                {{receita.porcoes}} {{receita.unidade_porcao}}
             </div>
         </div>
     </div>
@@ -59,7 +71,7 @@
 
     {% if is_detail is True %}
         <div class="como-fazer">
-            {{receita.comofazer|linebreaksbr }}
+            {{receita.modo_preparo|linebreaksbr }}
         </div>
     {% endif %}
 </div>

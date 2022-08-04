@@ -2,15 +2,15 @@
 {% load static %}
 
     {% block titulo %}
-    Receitas | 
+    {{ titulo }} -  
     {% endblock titulo %}
 
 {% block content %}
-    
     <div class="main-content main-content-list container">
         {% for receita in receitas %}
             {% include 'receita/partes/receita-card.html' %}
         {% endfor %}
     </div>
+
   
 {% endblock content %}
